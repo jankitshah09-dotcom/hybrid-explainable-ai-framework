@@ -1,0 +1,53 @@
+# Experiment Configuration
+
+experiments:
+  vision:
+    dataset: cifar10
+    models:
+      - resnet18
+      - resnet50
+      - vgg16
+    num_samples: 10
+    methods:
+      - lime
+      - shap
+      - gradcam
+    
+  nlp:
+    dataset: movie_reviews
+    models:
+      - bert
+    num_samples: 5
+    methods:
+      - lime
+      - shap
+    
+  timeseries:
+    dataset: stock_prices
+    models:
+      - lstm
+    num_samples: 5
+    methods:
+      - shap
+      - gradcam
+
+model_params:
+  num_classes: 10
+  pretrained: true
+
+explainer_params:
+  lime:
+    num_samples: 1000
+    num_features: 10
+  
+  shap:
+    num_samples: 100
+    background_samples: 100
+  
+  gradcam:
+    use_cuda: true
+
+visualization:
+  dpi: 150
+  figsize: [12, 8]
+  save_format: png
