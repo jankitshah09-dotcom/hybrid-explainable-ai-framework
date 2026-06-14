@@ -67,8 +67,11 @@ class ExplainabilityFramework:
         explanations = {}
         for method in methods:
             if method in self.explainers:
-                explainer = self.explainers[method]
-                explanations[method] = explainer.explain(input_data, **kwargs)
+                try:
+                    explainer = self.explainers[method]
+                    explanations[method] = explainer.explain(input_data, **kwargs)
+                except Exception as e:
+                    explanations[method] = {"method": method, "error": str(e)}
             else:
                 print(f"Warning: {method} not available")
 
